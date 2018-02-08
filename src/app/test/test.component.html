@@ -1,0 +1,15 @@
+<p>
+  {{ data }}
+</p>
+<p>
+  <input type="text" value="{{data}}"/>
+</p>
+<p>
+  <input type="text" [value]="data"/>
+</p>
+<p>
+  <button (click)="showAlert()">Click Me</button>
+</p>
+<p>
+  <input type="text" [(ngModel)]="data"/>
+</p>

@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Cost</td>
+      <td>Qty</td>
+      <td>Total</td>
+    </tr>
+  </thead>
+  <tbody>
+    <app-cart-item
+      *ngFor="let c of cartItems"
+      [item]="c">
+    </app-cart-item>
+  </tbody>
+</table>

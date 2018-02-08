@@ -1,0 +1,9 @@
+<!--<app-product [product]="productData"></app-product>-->
+
+<div *ngFor="let p of productList">
+        <app-product
+         [product]="p"
+         (addItem)="addItem($event)"
+         [ccode]="code">
+        </app-product>
+</div>

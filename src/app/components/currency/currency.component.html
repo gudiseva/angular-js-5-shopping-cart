@@ -1,0 +1,12 @@
+<select (change)="changeCurrency(currency.value)" #currency>
+  <option *ngFor="let curr of currencies">{{ curr }}</option>
+</select>
+
+<!--
+  The above in JavaScript is equivalent to:
+
+  <select id="currency"></select>
+
+var curr=document.getElementById(currency);
+console.log(curr.value);
+-->
