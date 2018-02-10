@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { products } from './products';
 import { Output, EventEmitter } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-product-list',
@@ -17,9 +18,17 @@ export class ProductListComponent implements OnInit {
 
   @Input()
   code = null;
+  data = true;
+  pageno = 0;
 
   constructor() {
     this.productList = products;
+    //this.productList = _.filter(products, {productStock: true});
+    // --- OR ---
+    //this.productList = _.filter(products, (p) => p.productStock === true); // === matches both value and data type
+    // --- OR ---
+    //this.productList = _.filter(products, (p) => p['productStock'] === true);
+
     /*
     this.productData = {
       productName : 'Product 1',
@@ -29,6 +38,7 @@ export class ProductListComponent implements OnInit {
       productImage : 'http://d2pa5gi5n2e1an.cloudfront.net/global/images/product/mobilephones/YU_Yureka_2/YU_Yureka_2_L_1.jpg'
     };
     */
+   
    }
 
   ngOnInit() {
@@ -36,6 +46,13 @@ export class ProductListComponent implements OnInit {
   addItem(e){
     //console.log(e);
     this.addtocart.emit( { data : e.data } );
+  }
+  changePage(t){
+    if(t === 'n') {
+      ++this.pageno;
+    } else {
+      --this.pageno;
+    }
   }
  
 }

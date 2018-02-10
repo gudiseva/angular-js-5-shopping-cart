@@ -1,0 +1,45 @@
+<form [formGroup]="userForm">
+  <label>Name</label>
+  <input type="text" formControlName="name"/>
+  <div *ngIf="userForm.get('name').dirty || userForm.get('name').touched">
+    <!--<span *ngIf="userForm.controls['name'].hasError('required')">Name is required</span>-->
+    <span *ngIf="userForm.get('name').hasError('required')">Name is required</span> <!-- This is preferred. -->
+  </div>
+  <br/>
+  <label>Age</label>
+  <input type="number" formControlName="age"/>
+  <!--
+  <div *ngIf="userForm.get('age').dirty || userForm.get('age').touched">
+    <span *ngIf="userForm.get('age').hasError('min')">Min age is 18</span>
+  </div>
+  -->
+  <app-show-errors [control]="userForm.controls['age']"></app-show-errors>
+  <br/>
+  <label>Email</label>
+  <input type="text" formControlName="email"/>
+  <app-show-errors [control]="userForm.controls['email']"></app-show-errors>
+  <br/>
+  <label>Contact</label>
+  <input type="text" formControlName="contact"/>
+  <br/>
+  <div formGroupName="address">
+    <label>City</label>
+    <input type="text" formControlName="city"/>
+    <br/>
+    <label>Pincode</label>
+    <input type="text" formControlName="pincode"/>
+    <div *ngIf="userForm.controls['address'].get('pincode').dirty || userForm.controls['address'].get('pincode').touched">
+      <!--
+        <span *ngIf="userForm.controls['address'].get('pincode').hasError('zipCode')">Invalid zipCode;
+          Valid zipCode is
+          {{userForm.controls['address'].get('pincode').errors['zipCode'].code}}
+        </span>
+      -->
+      <!-- OR -->
+        <app-show-errors [control]="userForm.controls['address'].get('pincode')"></app-show-errors>
+     </div>    
+  </div>
+  <input type="submit" value="submit" />  
+</form>
+
+<p>{{ userForm.value | json }}</p>

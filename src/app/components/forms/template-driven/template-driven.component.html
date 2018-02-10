@@ -1,0 +1,59 @@
+<!--
+<button (click)="loadData(f)">Load Data</button>
+<button (click)="patchData(f)">Patch Data</button>
+-->
+
+<button (click)="loadData()">Load Data</button>
+<button (click)="patchData()">Patch Data</button>
+
+<!--<form (ngSubmit)="save(f)" #f="ngForm">-->
+<form (ngSubmit)="save()" #f="ngForm">
+  <label>Name</label>
+  <input type = "text" name="name" ngModel required
+    #name="ngModel" minlength="5"/>
+  <div *ngIf="name.invalid && (name.touched || name.dirty)">
+    <!-- ? means can be nullable type -->
+    <span *ngIf="name.errors?.required">Name is required</span>
+    <span *ngIf="name.errors?.minlength">Min 5 chars is required</span>
+  </div>
+  <br/>
+  <label>Age</label>
+  <input type="number" name="age" ngModel required
+    #age="ngModel" min="18" max="45"/>
+  <div *ngIf="age.invalid && (age.touched || age.dirty)">
+      <span *ngIf="age.errors?.required">Age is required</span>
+      <span *ngIf="age.errors?.min||age.errors?.max">Age should be between 18-45</span>
+  </div>  
+  <br/>
+  <label>Email</label>
+<!--  <input type="text" name="email" ngModel required
+  #email="ngModel" email/> -->  <!-- Email is a type in HTML5-->
+  <input type="text" name="email" ngModel required
+  #email="ngModel" [pattern]="emailRegex"/>
+
+  <div *ngIf="email.invalid && (email.touched || email.dirty)">
+      <span *ngIf="email.errors?.required">Email is required</span>
+      <!--<span *ngIf="email.errors?.email">Incorrect email format</span>-->
+      <span *ngIf="email.errors?.pattern">Incorrect email format</span>
+  </div>    
+  <br/>
+  <label>Contact</label>
+  <input type="text" name="contact" ngModel required
+    #contact="ngModel"/>
+  <div *ngIf="contact.invalid && (contact.touched || contact.dirty)">
+      <span *ngIf="contact.errors?.required">
+          Contact is required
+      </span>
+  </div>    
+  <br/>
+  <div ngModelGroup="address">
+      <label>City</label>
+      <input type="text" name="city" ngModel required #city="ngModel"/>
+      <br/>
+      <label>Pincode</label>
+      <input type="text" name="pincode" ngModel required #pincode="ngModel"/>      
+  </div>
+  <input type="submit" value="submit" />
+</form>
+<!-- For Testing purposes -->
+<p>{{ f.value | json }}</p>
