@@ -13,5 +13,5 @@ export function FormModel() {
             city : new FormControl(),
             pincode: new FormControl(null, [Validators.required, zipCodeValidator])
         })  
-    });
+    }, { updateOn : 'blur' }); // change / blur / submit
 }

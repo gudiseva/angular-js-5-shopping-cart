@@ -16,7 +16,17 @@ import { PagePipe } from './pipes/page.pipe';
 import { TemplateDrivenComponent } from './components/forms/template-driven/template-driven.component';
 import { ModelDrivenComponent } from './components/forms/model-driven/model-driven.component';
 import { ShowErrorsComponent } from './components/forms/show-errors/show-errors.component';
-
+import { DynamicFormsComponent } from './components/forms/dynamic-forms/dynamic-forms.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AlbumsComponent } from './components/albums/albums.component';
+import { CartService } from './services/cart.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
+import { FirebaseComponent } from './components/firebase/firebase.component';
+import { LoginComponent } from './components/login/login.component';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -32,14 +42,22 @@ import { ShowErrorsComponent } from './components/forms/show-errors/show-errors.
     PagePipe,
     TemplateDrivenComponent,
     ModelDrivenComponent,
-    ShowErrorsComponent
+    ShowErrorsComponent,
+    DynamicFormsComponent,
+    AlbumsComponent,
+    FirebaseComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [CartService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

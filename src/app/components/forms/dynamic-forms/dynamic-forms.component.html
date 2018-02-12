@@ -1,0 +1,26 @@
+<form [formGroup]="formData">
+  <label>Name</label>
+  <input type="text" formControlName="name" />
+  <br/>
+  <label>Email</label>
+  <input type="text" formControlName="email"/>
+  <br/>
+  <button (click)="addNewAddress()">Add Address</button>
+  <br/>
+  <div formArrayName="addresses">
+    <div *ngFor="let c of addressObj.controls;let i=index">
+        <div [formGroupName]="i">
+            <label>City</label>
+            <input type="text" formControlName="city"/>
+            <br/>
+            <label>Pincode</label>
+            <input type="text" formControlName="pincode" />
+            <br/>
+            <button *ngIf="addressObj.controls.length > 1"
+              (click)="removeAddress(i)">X</button>
+        </div>
+    </div>
+  </div>
+</form>
+
+<p>{{ formData.value | json }}</p>

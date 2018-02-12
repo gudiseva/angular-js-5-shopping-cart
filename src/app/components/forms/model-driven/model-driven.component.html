@@ -1,4 +1,4 @@
-<form [formGroup]="userForm">
+<form [formGroup]="userForm" (ngSubmit)="saveData()">
   <label>Name</label>
   <input type="text" formControlName="name"/>
   <div *ngIf="userForm.get('name').dirty || userForm.get('name').touched">

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { products } from './products';
 import { Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,7 +22,8 @@ export class ProductListComponent implements OnInit {
   data = true;
   pageno = 0;
 
-  constructor() {
+  //constructor() {
+  constructor(private cartService: CartService) {
     this.productList = products;
     //this.productList = _.filter(products, {productStock: true});
     // --- OR ---
@@ -41,11 +43,16 @@ export class ProductListComponent implements OnInit {
    
    }
 
+   ngOnChanges(changes: any){
+     console.log(changes);
+   }
+
   ngOnInit() {
   }
   addItem(e){
     //console.log(e);
-    this.addtocart.emit( { data : e.data } );
+    //this.addtocart.emit( { data : e.data } );
+    this.cartService.addToCart(e.data);
   }
   changePage(t){
     if(t === 'n') {

@@ -1,0 +1,10 @@
+<table>
+  <tr *ngFor="let alb of albums">
+    <td>
+      <img [src]="alb?.image" height="100" width="100" /> <!-- ? handles the null; it will not throw error -->
+    </td>
+    <td>
+      {{alb?.title}}
+    </td>
+  </tr>
+</table>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,9 +10,21 @@ export class CartComponent implements OnInit {
 
   @Input()
   cartItems = [];
-  constructor() { }
+  private cartService$ = null;
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
+    this.cartService$ = this.cartService.cartObservable$
+    .subscribe(
+      (data) => {
+        console.log('new data received');
+        this.cartItems = <any[]>data;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.cartService$.unsubscribe();
   }
 
 }
