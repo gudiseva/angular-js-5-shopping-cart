@@ -1,12 +1,14 @@
 <!--<app-product [product]="productData"></app-product>-->
 
 <!--<div *ngFor="let p of productList | filterdata:'productCost':'>':'10000'">-->
-<div *ngFor="let p of productList | filterdata:'productStock':'=': data | page:3:pageno">
-        <app-product
-         [product]="p"
-         (addItem)="addItem($event)"
-         [ccode]="code">
-        </app-product>
+<div class="row">
+        <div class="col-md-3 text-center" *ngFor="let p of productList | filterdata:'productStock':'=': data | page:12:pageno">
+                <app-product
+                [product]="p"
+                (addItem)="addItem($event)"
+                [ccode]="code">
+                </app-product>
+        </div>
 </div>
 <div>
         <button (click)="changePage('n')" *ngIf="data!==null">Next</button>

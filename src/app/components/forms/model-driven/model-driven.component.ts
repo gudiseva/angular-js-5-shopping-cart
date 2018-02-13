@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { REGEX_PATTERNS } from '../REGEX_PATTERNS';
 import { FormModel } from './models';
 import { AjaxCallsService } from '../../../services/ajax-calls.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-model-driven',
@@ -15,11 +16,15 @@ export class ModelDrivenComponent implements OnInit {
   userForm: FormGroup = null;
 
 
-  constructor(private formService: AjaxCallsService) {
+  constructor(private formService: AjaxCallsService, private activatedRoute: ActivatedRoute) {
     this.initializeForm();
    }
 
-  ngOnInit() {  }
+  ngOnInit() {
+    this.activatedRoute.parent.params.subscribe(
+      (par) => this.userForm.patchValue({name: par['name']})
+    );
+    }
 
   initializeForm() {
     /*

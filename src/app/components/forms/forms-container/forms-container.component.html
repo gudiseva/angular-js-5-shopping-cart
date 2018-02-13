@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-3">
+    <ul>
+      <li>
+        <a routerLink="reactive">Reactive</a>
+      </li>
+      <li>
+        <a routerLink="template">Template</a>
+      </li>
+      <li>
+        <a routerLink="dynamic">Dynamic</a>
+      </li>
+    </ul>
+  </div>
+  <!--<div class="col-md-9">-->
+  <div class="col-md-10">
+    <h3>Hi {{username | titlecase}}</h3> 
+      <router-outlet></router-outlet>
+  </div>
+
+</div>
+

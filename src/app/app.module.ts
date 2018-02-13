@@ -17,7 +17,7 @@ import { TemplateDrivenComponent } from './components/forms/template-driven/temp
 import { ModelDrivenComponent } from './components/forms/model-driven/model-driven.component';
 import { ShowErrorsComponent } from './components/forms/show-errors/show-errors.component';
 import { DynamicFormsComponent } from './components/forms/dynamic-forms/dynamic-forms.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { CartService } from './services/cart.service';
 import { AngularFireModule } from 'angularfire2';
@@ -27,6 +27,12 @@ import { FirebaseComponent } from './components/firebase/firebase.component';
 import { LoginComponent } from './components/login/login.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UserService } from './services/user.service';
+import { ErrorsComponent } from './components/errors/errors.component';
+import { AppRoutingModule } from './app/app-routing.module';
+import { UiModule } from './ui/ui.module';
+import { FormsContainerComponent } from './components/forms/forms-container/forms-container.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { CalendarDirective } from './directives/calendar.directive';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,10 @@ import { UserService } from './services/user.service';
     DynamicFormsComponent,
     AlbumsComponent,
     FirebaseComponent,
-    LoginComponent
+    //LoginComponent,
+    ErrorsComponent,
+    FormsContainerComponent,
+    CalendarDirective
   ],
   imports: [
     BrowserModule,
@@ -55,9 +64,14 @@ import { UserService } from './services/user.service';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AppRoutingModule,
+    UiModule
   ],
-  providers: [CartService, UserService],
+  providers: [CartService,
+     //UserService
+     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

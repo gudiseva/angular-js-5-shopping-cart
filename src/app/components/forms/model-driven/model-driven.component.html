@@ -1,45 +1,57 @@
+<h2>Model Driven Form</h2>
 <form [formGroup]="userForm" (ngSubmit)="saveData()">
-  <label>Name</label>
-  <input type="text" formControlName="name"/>
-  <div *ngIf="userForm.get('name').dirty || userForm.get('name').touched">
-    <!--<span *ngIf="userForm.controls['name'].hasError('required')">Name is required</span>-->
-    <span *ngIf="userForm.get('name').hasError('required')">Name is required</span> <!-- This is preferred. -->
+  <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="name" class="form-control"/>
+      <div *ngIf="userForm.get('name').dirty || userForm.get('name').touched">
+        <!--<span *ngIf="userForm.controls['name'].hasError('required')">Name is required</span>-->
+        <span *ngIf="userForm.get('name').hasError('required')">Name is required</span> <!-- This is preferred. -->
+      </div>
+      <!--<br/>-->   
   </div>
-  <br/>
-  <label>Age</label>
-  <input type="number" formControlName="age"/>
-  <!--
-  <div *ngIf="userForm.get('age').dirty || userForm.get('age').touched">
-    <span *ngIf="userForm.get('age').hasError('min')">Min age is 18</span>
-  </div>
-  -->
-  <app-show-errors [control]="userForm.controls['age']"></app-show-errors>
-  <br/>
-  <label>Email</label>
-  <input type="text" formControlName="email"/>
-  <app-show-errors [control]="userForm.controls['email']"></app-show-errors>
-  <br/>
-  <label>Contact</label>
-  <input type="text" formControlName="contact"/>
-  <br/>
-  <div formGroupName="address">
-    <label>City</label>
-    <input type="text" formControlName="city"/>
-    <br/>
-    <label>Pincode</label>
-    <input type="text" formControlName="pincode"/>
-    <div *ngIf="userForm.controls['address'].get('pincode').dirty || userForm.controls['address'].get('pincode').touched">
+  <div class="form-group">
+      <label>Age</label>
+      <input type="number" formControlName="age" class="form-control" appCalendar />
       <!--
-        <span *ngIf="userForm.controls['address'].get('pincode').hasError('zipCode')">Invalid zipCode;
-          Valid zipCode is
-          {{userForm.controls['address'].get('pincode').errors['zipCode'].code}}
-        </span>
+      <div *ngIf="userForm.get('age').dirty || userForm.get('age').touched">
+        <span *ngIf="userForm.get('age').hasError('min')">Min age is 18</span>
+      </div>
       -->
-      <!-- OR -->
-        <app-show-errors [control]="userForm.controls['address'].get('pincode')"></app-show-errors>
-     </div>    
+      <app-show-errors [control]="userForm.controls['age']"></app-show-errors>
+      <!--<br/>-->
   </div>
-  <input type="submit" value="submit" />  
+  <div class="form-group">
+      <label>Email</label>
+      <input type="text" formControlName="email" class="form-control"/>
+      <app-show-errors [control]="userForm.controls['email']"></app-show-errors>
+      <!--<br/>    -->
+  </div>
+  <div class="form-group">
+      <label>Contact</label>
+      <input type="text" formControlName="contact" class="form-control"/>
+      <!--<br/>    -->
+  </div>
+  <div class="form-group">
+      <div formGroupName="address">
+          <label>City</label>
+          <input type="text" formControlName="city" class="form-control"/>
+          <app-show-errors [control]="userForm.controls['address'].get('city')"></app-show-errors>
+          <!--<br/> -->
+          <label>Pincode</label>
+          <input type="text" formControlName="pincode" class="form-control"/>
+          <div *ngIf="userForm.controls['address'].get('pincode').dirty || userForm.controls['address'].get('pincode').touched">
+            <!--
+              <span *ngIf="userForm.controls['address'].get('pincode').hasError('zipCode')">Invalid zipCode;
+                Valid zipCode is
+                {{userForm.controls['address'].get('pincode').errors['zipCode'].code}}
+              </span>
+            -->
+            <!-- OR -->
+              <app-show-errors [control]="userForm.controls['address'].get('pincode')"></app-show-errors>
+           </div>    
+        </div>      
+  </div>
+  <input type="submit" value="submit" class="btn btn-dark" />  
 </form>
 
 <p>{{ userForm.value | json }}</p>

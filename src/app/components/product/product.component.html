@@ -1,11 +1,12 @@
 <div>
-  <img [src]="product.productImage" height="200" width="200"/>
+  <!--<img [src]="product.productImage" height="200" width="200"/>-->
+  <img [src]="product.productImage" class="img-thumbnail"/>
   <h3>{{ product.productName | uppercase }}</h3>
   <!--<h4>{{ product.productCost | currency:'INR':'code':'3.2' }}</h4>-->
   <h4>{{ product.productCost | conversion: ccode | currency:ccode }}</h4>
   <button *ngIf="product.productStock==true;else nostock"
-    (click)="addToCart()">Add to Cart</button>
+    (click)="addToCart()" class="btn btn-outline-primary">Add to Cart</button>
   <ng-template #nostock>
-    <p>Out of stock</p>
+    <p class="text-danger">Out of stock</p>
   </ng-template>
 </div>
